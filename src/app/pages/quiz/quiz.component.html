@@ -1,0 +1,16 @@
+<div *ngIf="currentModule && currentQuestionIndex < currentModule.questions.length; else endQuiz">
+    <h2>{{ currentModule.title }}</h2>
+    <h3>{{ currentModule.questions[currentQuestionIndex].questionText }}</h3>
+    <ul>
+      <li *ngFor="let option of currentModule.questions[currentQuestionIndex].options; let i = index">
+        <input type="radio" [value]="i" [ngModel]="selectedOptionIndex" (ngModelChange)="selectedOptionIndex = $event" name="options"> {{ option }}
+      </li>
+    </ul>
+    <button (click)="submitAnswer()">Next</button>
+  </div>
+  
+  <ng-template #endQuiz>
+    <h2>Quiz Completed!</h2>
+    <p>Your score: {{ score }}/{{ currentModule?.questions?.length }}</p>
+  </ng-template>
+  
